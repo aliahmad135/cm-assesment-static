@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Get Started</h1>
+
+      <form id="registration-form" novalidate>
+        <!-- ========================= -->
+        <!-- STEP 1 -->
+        <!-- ========================= -->
+        <section id="step-1">
+          <h2>Step 1: Eligibility</h2>
+
+          <!-- Level of Education -->
+          <label>
+            Level of Education
+            <select name="education_level">
+              <option value="">Select an option</option>
+              <option value="high_school">High School</option>
+              <option value="associate">Associate Degree</option>
+              <option value="bachelor">Bachelor’s Degree</option>
+              <option value="master">Master’s Degree or Higher</option>
+            </select>
+          </label>
+
+          <!-- Internet Access -->
+          <label>
+            Do you have Internet Access?
+            <select name="internet_access">
+              <option value="">Select an option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <!-- Certifications -->
+          <label>
+            Do you have any certifications?
+            <select name="has_certifications">
+              <option value="">Select an option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+
+          <!-- Step 1 Errors -->
+          <div id="step-1-errors" aria-live="polite"></div>
+
+          <button type="button" id="step-1-next">Next Step</button>
+        </section>
+
+        <!-- ========================= -->
+        <!-- STEP 2 -->
+        <!-- ========================= -->
+        <section id="step-2" hidden>
+          <h2>Step 2: Personal Information</h2>
+
+          <!-- First Name -->
+          <label>
+            First Name
+            <input type="text" name="first_name" autocomplete="given-name" />
+          </label>
+
+          <!-- Last Name -->
+          <label>
+            Last Name
+            <input type="text" name="last_name" autocomplete="family-name" />
+          </label>
+
+          <!-- Email -->
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" />
+          </label>
+
+          <!-- Phone -->
+          <label>
+            Phone Number
+            <input
+              type="tel"
+              name="phone"
+              placeholder="(555) 555-5555"
+              autocomplete="tel"
+            />
+          </label>
+
+          <!-- Address -->
+          <label>
+            Address
+            <input type="text" name="address" autocomplete="street-address" />
+          </label>
+
+          <!-- City -->
+          <label>
+            City
+            <input type="text" name="city" autocomplete="address-level2" />
+          </label>
+
+          <!-- State -->
+          <label>
+            State
+            <select name="state">
+              <option value="">Select a state</option>
+              <option value="AL">AL</option>
+              <option value="KY">KY</option>
+              <option value="MA">MA</option>
+              <option value="MN">MN</option>
+              <option value="NJ">NJ</option>
+              <option value="NV">NV</option>
+              <option value="OR">OR</option>
+              <option value="SC">SC</option>
+              <option value="TX">TX</option>
+              <option value="WA">WA</option>
+            </select>
+          </label>
+
+          <!-- Agreement -->
+          <label class="checkbox">
+            <input type="checkbox" name="agreement" />
+            I agree to the terms and conditions
+          </label>
+
+          <!-- Step 2 Errors -->
+          <div id="step-2-errors" aria-live="polite"></div>
+
+          <button type="submit" id="submit-registration">Submit</button>
+        </section>
+      </form>
+    </main>
+
+    <!-- Import Map for npm packages -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.0"
+        }
+      }
+    </script>
+
+    <!-- Supabase Configuration -->
+    <script>
+      // Configure Supabase credentials
+      // Replace these with your actual Supabase project credentials
+      window.__SUPABASE_CONFIG__ = {
+        VITE_SUPABASE_URL: "https://vpgdmsgvlrkhexxfvswq.supabase.co",
+        VITE_SUPABASE_ANON_KEY:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwZ2Rtc2d2bHJraGV4eGZ2c3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NTY1MTcsImV4cCI6MjA4MzQzMjUxN30.61Zs_Gsr8MSSz8ZvPkx6w6x8ye8OyYa583yXBwlVMKk",
+      };
+    </script>
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>

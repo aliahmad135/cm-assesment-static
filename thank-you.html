@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Thank You</h1>
+
+      <section>
+        <h2>Your Information</h2>
+
+        <div id="user-summary">
+          <!-- User data injected here -->
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Offers</h2>
+
+        <div id="selected-offers">
+          <!-- Selected offers injected here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Import Map for npm packages -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.0"
+        }
+      }
+    </script>
+
+    <!-- Supabase Configuration -->
+    <script>
+      window.__SUPABASE_CONFIG__ = {
+        VITE_SUPABASE_URL: "https://vpgdmsgvlrkhexxfvswq.supabase.co",
+        VITE_SUPABASE_ANON_KEY:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwZ2Rtc2d2bHJraGV4eGZ2c3dxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NTY1MTcsImV4cCI6MjA4MzQzMjUxN30.61Zs_Gsr8MSSz8ZvPkx6w6x8ye8OyYa583yXBwlVMKk",
+      };
+    </script>
+    <script type="module" src="dist/thank-you.js"></script>
+  </body>
+</html>
