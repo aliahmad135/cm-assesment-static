@@ -28,7 +28,6 @@ serve(async (req) => {
   }
 
   try {
-    // Get Supabase client
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_ANON_KEY") ?? "",
@@ -104,7 +103,6 @@ serve(async (req) => {
     if (error) {
       console.error("Database error:", error);
 
-      // Check if it's a unique constraint violation (duplicate email)
       const errorMessage = error.message || "";
       const isDuplicateEmail =
         error.code === "23505" ||

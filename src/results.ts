@@ -29,15 +29,29 @@ class ResultsApp {
       return;
     }
 
+    this.showLoading();
+
     try {
       await this.offersController.loadOffersForState(userState);
+      this.hideLoading();
       this.renderOffers();
       this.initializeEventListeners();
     } catch (error) {
+      this.hideLoading();
       const message =
         error instanceof Error ? error.message : "Failed to load offers";
       ErrorDisplay.displayErrors("offers-errors", [message]);
     }
+  }
+
+  private showLoading(): void {
+    if (!this.offersListContainer) return;
+    this.offersListContainer.innerHTML = '<div class="loading-spinner"><div class="spinner"></div>Loading offers...</div>';
+  }
+
+  private hideLoading(): void {
+    if (!this.offersListContainer) return;
+    // Clear loading state - renderOffers will populate it
   }
 
   private renderOffers(): void {
