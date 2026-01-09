@@ -26,28 +26,34 @@ export class SupabaseService {
   }
 
   async submitRegistration(user: User): Promise<{ userId: string }> {
-    try {
-      const { data, error } = await this.client.functions.invoke(
-        "submit-registration",
-        {
-          body: user.toJSON(),
-        }
-      );
-
-      if (error) {
-        throw new Error(error.message || "Failed to submit registration");
+    const response = await fetch(
+      `${this.supabaseUrl}/functions/v1/submit-registration`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.supabaseAnonKey}`,
+          apikey: this.supabaseAnonKey,
+        },
+        body: JSON.stringify(user.toJSON()),
       }
+    );
 
-      if (!data || !data.userId) {
-        throw new Error("Invalid response from registration function");
-      }
+    const responseData = await response.json();
 
-      return { userId: data.userId };
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Unknown error occurred";
-      throw new Error(`Registration failed: ${message}`);
+    if (!response.ok) {
+      const errorMessage =
+        responseData.message ||
+        responseData.error ||
+        "Failed to submit registration";
+      throw new Error(errorMessage);
     }
+
+    if (!responseData.userId) {
+      throw new Error("Invalid response from registration function");
+    }
+
+    return { userId: responseData.userId };
   }
 
   async getOffersForState(state: string): Promise<Offer[]> {

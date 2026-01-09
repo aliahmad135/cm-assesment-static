@@ -61,18 +61,36 @@ class RegistrationApp {
     if (!this.submitButton) return;
 
     const formData = this.collectStep2Data();
-    const result = await this.formController.validateAndSubmit(formData);
 
-    if (result.success && result.userId) {
-      ErrorDisplay.clearErrors("step-2-errors");
-      Storage.saveUserId(result.userId);
-      const userState =
-        typeof formData.state === "string" ? formData.state : "";
-      Storage.saveUserState(userState);
-      // Send them to the offers page
-      window.location.href = "results.html";
-    } else {
-      ErrorDisplay.displayErrors("step-2-errors", result.errors);
+    // Set loading state
+    const originalButtonText = this.submitButton.textContent;
+    this.submitButton.disabled = true;
+    this.submitButton.textContent = "Submitting...";
+
+    try {
+      const result = await this.formController.validateAndSubmit(formData);
+
+      if (result.success && result.userId) {
+        ErrorDisplay.clearErrors("step-2-errors");
+        Storage.saveUserId(result.userId);
+        const userState =
+          typeof formData.state === "string" ? formData.state : "";
+        Storage.saveUserState(userState);
+        // Send them to the offers page
+        window.location.href = "results.html";
+      } else {
+        ErrorDisplay.displayErrors("step-2-errors", result.errors);
+        // Restore button state on error
+        this.submitButton.disabled = false;
+        this.submitButton.textContent = originalButtonText || "Submit";
+      }
+    } catch (error) {
+      // Handle unexpected errors
+      const message =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+      ErrorDisplay.displayErrors("step-2-errors", [message]);
+      this.submitButton.disabled = false;
+      this.submitButton.textContent = originalButtonText || "Submit";
     }
   }
 

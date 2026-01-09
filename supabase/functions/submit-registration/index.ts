@@ -103,6 +103,28 @@ serve(async (req) => {
 
     if (error) {
       console.error("Database error:", error);
+
+      // Check if it's a unique constraint violation (duplicate email)
+      const errorMessage = error.message || "";
+      const isDuplicateEmail =
+        error.code === "23505" ||
+        errorMessage.includes("duplicate key value") ||
+        errorMessage.includes("unique constraint") ||
+        errorMessage.includes("users_email_key");
+
+      if (isDuplicateEmail) {
+        return new Response(
+          JSON.stringify({
+            error: "Email has already been used",
+            message: "Email has already been used",
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
       return new Response(
         JSON.stringify({
           error: "Failed to create user",

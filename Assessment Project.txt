@@ -1,0 +1,78 @@
+Assessment Project
+
+Overview
+--------
+
+I used AI strategically throughout this project to speed up certain tasks and 
+make better use of my time, while ensuring I understood and validated everything 
+before using it.
+
+Planning Phase
+--------------
+
+I started by reading through the entire assessment PDF to understand all 
+requirements - technologies, restrictions, patterns to follow, and deliverables. 
+I created a note file to track key requirements like TypeScript-only, SOLID 
+principles, mobile-first design, Supabase integration, and security measures.
+
+I planned the architecture in my head - organizing code into models, validators, 
+services, controllers, and utilities for clean separation of concerns.
+
+Development Process
+-------------------
+
+I built all the application code myself:
+- TypeScript classes (User, Offer models)
+- Controllers (FormController, OffersController)
+- Validators (EmailValidator, PhoneValidator, FormValidator)
+- Services (SupabaseService)
+- Utilities (Sanitizer, Storage, ErrorDisplay)
+- HTML structure and CSS styling
+- Edge Functions (submit-registration, submit-offers)
+- All business logic and form handling
+
+AI Assistance
+------------
+
+I used AI for:
+
+1. Database Schema Validation
+   - I designed the schema myself (users, offers, states, user_offers tables)
+   - Used AI to verify the SQL was correct - checked syntax, foreign keys, 
+     indexes, RLS policies, and best practices
+   - AI helped identify any issues or improvements needed
+   - I reviewed all suggestions and made final decisions
+   - Validated the final schema before using it in Supabase
+
+2. Test File Generation
+   - AI created initial test files:
+     * Jest unit tests for validators, models, and utilities
+     * Playwright E2E tests for form flow
+     * Deno tests for Edge Functions
+   - I reviewed every test:
+     * Fixed issues (e.g., Sanitizer test logic)
+     * Removed edge cases that didn't make sense
+     * Ensured all tests pass
+     * Verified test coverage
+
+3. Other Small Tasks
+   - Used AI for various boilerplate and repetitive tasks to speed up development
+
+Validation & Review
+-------------------
+
+I didn't use any AI output blindly. For everything AI generated:
+- Reviewed and understood the code
+- Validated it against requirements
+- Fixed issues and made adjustments
+- Tested thoroughly
+- Ensured it followed best practices
+
+I also:
+- Ran all tests to ensure they pass
+- Tested the full application end-to-end multiple times
+- Verified all requirements were met
+- Reviewed code for security (XSS prevention, input validation)
+- Made sure comments sounded natural (not AI-generated)
+- Ensured code followed SOLID principles and OOP patterns
+

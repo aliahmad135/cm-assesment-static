@@ -8,7 +8,7 @@ You'll need:
 
 - Node.js 18 or higher
 - A Supabase account (free tier works fine)
-- Supabase CLI installed: `npm install -g supabase`
+- Supabase CLI (use `npx supabase` - no installation needed)
 
 ### Setup Steps
 
@@ -36,14 +36,23 @@ You'll need:
    - Copy everything from `supabase/migrations/20240101000000_initial_schema.sql`
    - Paste and run it
 
-5. **Deploy the functions:**
+5. **Deploy the Edge Functions via CLI:**
+
+   The functions are structured for CLI deployment. Deploy them using:
 
    ```bash
-   supabase login
-   supabase link --project-ref your-project-ref
-   supabase functions deploy submit-registration
-   supabase functions deploy submit-offers
+   # Login to Supabase
+   npx supabase login
+
+   # Link to your project (using your project reference ID)
+   npx supabase link --project-ref vpgdmsgvlrkhexxfvswq
+
+   # Deploy the functions
+   npx supabase functions deploy submit-registration
+   npx supabase functions deploy submit-offers
    ```
+
+   **Note:** Using `npx` runs the CLI without global installation. If the functions are already deployed (visible in dashboard), these commands will update/redeploy them via CLI.
 
 6. **Build and run:**
    ```bash
@@ -66,8 +75,9 @@ src/
   thank-you.ts     # Summary page
 
 supabase/
-  functions/       # Server-side functions
+  functions/       # Server-side Edge Functions (deployed via CLI)
   migrations/      # Database setup
+  config.toml      # Supabase CLI configuration
 
 tests/            # Unit and E2E tests
 ```
@@ -75,10 +85,11 @@ tests/            # Unit and E2E tests
 ## What It Does
 
 - Two-step registration form (eligibility questions, then personal info)
-- Shows offers based on the user's state
-- Validates email and phone numbers
+- Shows offers based on the user's state (state-restricted offers)
+- Validates email and phone numbers (supports international format with +)
 - Prevents XSS attacks by sanitizing all output
-- Works on mobile and desktop
+- Works on mobile and desktop (mobile-first responsive design)
+- Submit button shows loading state during API calls
 
 ## Running Tests
 
@@ -90,7 +101,7 @@ npm test
 npm run test:e2e
 
 # Function tests
-deno test supabase/functions
+deno test tests/functions/ --allow-net --allow-env
 ```
 
 Note: First time running E2E tests? Install browsers with `npx playwright install`.
