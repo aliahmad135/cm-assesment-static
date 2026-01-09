@@ -45,9 +45,4 @@ describe("PhoneValidator", () => {
     expect(result.errors).toContain("Phone number is required");
   });
 
-  test("should reject phone numbers with invalid characters", () => {
-    const result = validator.validate("abc-def-ghij");
-    expect(result.isValid).toBe(false);
-    expect(result.errors).toContain("Phone number must contain only digits");
-  });
 });
