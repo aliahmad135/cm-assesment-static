@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Tests for submit-offers Edge Function
  * Run with: deno test supabase/functions/submit-offers/
